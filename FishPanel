@@ -1,0 +1,26 @@
+package FunFish;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+
+import javax.swing.JPanel;
+
+@SuppressWarnings("serial")
+public class FishPanel extends JPanel 
+{
+	public static Color green = new Color(1666073);
+	@Override
+	protected void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		g.setColor(green);
+		g.fillRect(0, 0, 800, 700); 
+		MainFish mainFish = MainFish.mainFish;
+		g.setColor(Color.orange);
+		g.fillRect(mainFish.fishX.x * MainFish.CENTER, mainFish.fishX.y * MainFish.CENTER, MainFish.CENTER, MainFish.CENTER);
+		//String record = "Score: " +snake.score + ", Length: " + snake.tailLength + ", Time: " + snake.time / 20;
+		//g.setColor(Color.yellow);
+		//g.drawString(record, (int) (getWidth() / 2 - record.length() * 2.5f), 10);
+	}
+}
