@@ -1,0 +1,149 @@
+package FunFish;
+
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Random;
+
+import javax.swing.JFrame;
+import javax.swing.Timer;
+
+
+
+public class MainFish implements ActionListener, KeyListener 
+{
+	public static MainFish mainFish;
+	public Point fishX;
+	public FishPanel fishPanel;
+	public JFrame jframe;
+	public static final int STABLE = 0, LEFT = 1, RIGHT = 2, UP = 3, DOWN = 4, CENTER = 50;
+	public int direction, time;
+	public boolean over = false;
+	public Random random;
+	public Dimension dim;
+	public Timer timer = new Timer(20, this);
+	
+	
+	public MainFish()
+	{
+		dim = Toolkit.getDefaultToolkit().getScreenSize();
+		jframe = new JFrame("Hungry Fish");
+		jframe.setVisible(true);
+		jframe.setSize(805, 700);
+		jframe.setResizable(false);
+		jframe.setLocation(dim.width / 2 - jframe.getWidth() / 2, dim.height / 2 - jframe.getHeight() / 2);
+		jframe.add(fishPanel = new FishPanel());
+		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jframe.addKeyListener(this);
+		startGame();
+	}
+	
+	public void startGame()
+	{
+		over = false;
+		fishX = new Point(7, 11);
+		direction = STABLE;
+		time = 0;
+		timer.start();
+	}
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		fishPanel.repaint();
+		
+		if(direction == LEFT && !over)
+		{
+			if(fishX.x >= 1)
+			{
+				fishX = new Point(fishX.x - 1, fishX.y);
+				direction = STABLE;
+			}
+			else
+				direction = STABLE;
+		}
+		
+		if(direction == RIGHT && !over)
+		{
+			if(fishX.x <= 14)
+			{
+				fishX = new Point(fishX.x + 1, fishX.y);
+				direction = STABLE;
+			}
+			else
+				direction = STABLE;
+		}
+		
+		if(direction == UP && !over)
+		{
+			if(fishX.y >= 1)
+			{
+				fishX = new Point(fishX.x, fishX.y - 1);
+				direction = STABLE;
+			}
+			else
+				direction = STABLE;
+		}
+		
+		if(direction == DOWN && !over)
+		{
+			if(fishX.y <= 11)
+			{
+				fishX = new Point(fishX.x, fishX.y + 1);
+				direction = STABLE;
+			}
+			else
+				direction = STABLE;
+		}
+		
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		int i = e.getKeyCode();
+		if (i == KeyEvent.VK_LEFT)
+		{
+			direction = LEFT;
+		}
+			
+		if (i == KeyEvent.VK_RIGHT)
+		{
+			direction = RIGHT;
+		}
+		
+		if (i == KeyEvent.VK_UP)
+		{
+			direction = UP;
+		}
+		
+		if (i == KeyEvent.VK_DOWN)
+		{
+			direction = DOWN;
+		}
+	
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void main(String[] args){
+		mainFish = new MainFish();
+	}
+
+}
