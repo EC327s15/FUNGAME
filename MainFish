@@ -1,12 +1,14 @@
 package FunFish;
 
 import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.Point2D;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -17,16 +19,18 @@ import javax.swing.Timer;
 public class MainFish implements ActionListener, KeyListener 
 {
 	public static MainFish mainFish;
-	public Point fishX;
+	public Point2D.Double fish;
+	public static OtherFish[] otherFish;		//foodFish, killerFish
 	public FishPanel fishPanel;
 	public JFrame jframe;
-	public static final int STABLE = 0, LEFT = 1, RIGHT = 2, UP = 3, DOWN = 4, CENTER = 50;
-	public int direction, time;
-	public boolean over = false;
-	public Random random;
+	public static final int STABLE = 0, LEFT = 1, RIGHT = 2, UP = 3, DOWN = 4, SCALE = 10;
+	public int direction, time, numOtherFish;
+	public double fishR;// oFishR;
+	public boolean over, eaten;
+	public Random random = new Random();
 	public Dimension dim;
 	public Timer timer = new Timer(20, this);
-	
+	public long startTime, endTime;
 	
 	public MainFish()
 	{
@@ -44,10 +48,17 @@ public class MainFish implements ActionListener, KeyListener
 	
 	public void startGame()
 	{
+		startTime = System.currentTimeMillis();
 		over = false;
-		fishX = new Point(7, 11);
-		direction = STABLE;
+		eaten = false;
+		fish = new Point2D.Double(38, 60);
+		fishR = 5;
 		time = 0;
+		direction = STABLE;
+		//oFish = new Point(random.nextInt(78), 1);
+		//oFishR = 3;
+		//oSpeed = 5;
+		//otherFish.clear();
 		timer.start();
 	}
 	
@@ -55,53 +66,59 @@ public class MainFish implements ActionListener, KeyListener
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		fishPanel.repaint();
 		
-		if(direction == LEFT && !over)
-		{
-			if(fishX.x >= 1)
+			fishPanel.repaint();
+			
+			if(!eaten)
 			{
-				fishX = new Point(fishX.x - 1, fishX.y);
-				direction = STABLE;
+				for(int i = 0; i < numOtherFish; i++)
+					otherFish[i].oFish = new Point2D.Double(otherFish[i].oFish.x, otherFish[i].oFish.y + 1);
 			}
-			else
-				direction = STABLE;
-		}
-		
-		if(direction == RIGHT && !over)
-		{
-			if(fishX.x <= 14)
+	
+			if(direction == LEFT && !over)
 			{
-				fishX = new Point(fishX.x + 1, fishX.y);
-				direction = STABLE;
+				if(fish.x >= 1)
+				{
+					fish = new Point2D.Double(fish.x - 1, fish.y);
+					direction = STABLE;
+				}
+				else
+					direction = STABLE;
 			}
-			else
-				direction = STABLE;
-		}
-		
-		if(direction == UP && !over)
-		{
-			if(fishX.y >= 1)
+			
+			if(direction == RIGHT && !over)
 			{
-				fishX = new Point(fishX.x, fishX.y - 1);
-				direction = STABLE;
+				if(fish.x <= 78)
+				{
+					fish = new Point2D.Double(fish.x + 1, fish.y);
+					direction = STABLE;
+				}
+				else
+					direction = STABLE;
 			}
-			else
-				direction = STABLE;
-		}
-		
-		if(direction == DOWN && !over)
-		{
-			if(fishX.y <= 11)
+			
+			if(direction == UP && !over)
 			{
-				fishX = new Point(fishX.x, fishX.y + 1);
-				direction = STABLE;
+				if(fish.y >= 1)
+				{
+					fish = new Point2D.Double(fish.x, fish.y - 1);
+					direction = STABLE;
+				}
+				else
+					direction = STABLE;
 			}
-			else
-				direction = STABLE;
-		}
-		
-		
+			
+			if(direction == DOWN && !over)
+			{
+				if(fish.y <= 64)
+				{
+					fish = new Point2D.Double(fish.x, fish.y + 1);
+					direction = STABLE;
+				}
+				else
+					direction = STABLE;
+			}	
+
 	}
 
 	@Override
@@ -127,7 +144,6 @@ public class MainFish implements ActionListener, KeyListener
 		{
 			direction = DOWN;
 		}
-	
 	}
 
 	@Override
@@ -142,8 +158,52 @@ public class MainFish implements ActionListener, KeyListener
 		
 	}
 	
+	public double getFishR()
+	{
+		return fishR;
+	}
+	
+	public double getFishX()
+	{
+		return fish.x;
+	}
+	
+	public double getFishY()
+	{
+		return fish.y;
+	}
+	
+	private void deleteOtherFish(int index)
+	{
+		numOtherFish--;
+		for(int i = index; i < numOtherFish; i++)
+		{
+			otherFish[i] = otherFish[i+1];
+			otherFish[numOtherFish] = null;
+		}
+	}
+	
+	private void addOtherFish(OtherFish f)
+	{
+		otherFish[numOtherFish] = f;
+		numOtherFish++;
+	}
+	
+	private void updateOtherFish()		//only contains the eat condition
+	{
+		for(int i = 0; i < numOtherFish; i++)
+		{
+			otherFish[i].otherFishMove();
+			if(otherFish[i].eatOtherFish(mainFish))
+			{
+				fishR += 0.5;
+				deleteOtherFish(i);
+				i--;
+			}
+		}
+	}
+	
 	public static void main(String[] args){
 		mainFish = new MainFish();
 	}
-
 }
