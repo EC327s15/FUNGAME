@@ -1,0 +1,47 @@
+package FunFish;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
+
+public class OtherFish 
+{
+	public static OtherFish otherFish;
+	public Point2D.Double oFish;
+	public double oSpeed, oFishR;
+	
+	public OtherFish(Double oFish, double oSpeed, double oFishR)
+	{
+		this.oFish = oFish;
+		double p = (int) Math.ceil(Math.random()*14);
+		oFish.x = p;
+		this.oSpeed = oSpeed;
+		this.oFishR = oFishR;
+	}
+	
+	public void otherFishMove()
+	{
+		oFish.y += oSpeed;
+	}
+	
+	public boolean eatOtherFish(MainFish mainFish)
+	{
+		if(Math.pow(oFishR + mainFish.getFishR(), 2) > Math.pow(mainFish.getFishX() - oFish.x, 2) + Math.pow(mainFish.getFishY() - oFish.y, 2))
+		{	
+			mainFish.eaten = true;
+			return true;
+		}		
+		else
+		{
+			mainFish.eaten = false;
+			return false;
+		}		
+	}
+	
+	public void draw(Graphics g)
+	{
+		g.setColor(Color.BLACK);
+		g.fillOval((int)oFish.x * MainFish.SCALE, (int)oFish.y * MainFish.SCALE, (int)oFishR * MainFish.SCALE, (int)oFishR * MainFish.SCALE);
+	}
+}
