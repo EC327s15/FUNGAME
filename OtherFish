@@ -8,8 +8,8 @@ import java.awt.geom.Point2D.Double;
 public class OtherFish 
 {
 	public static OtherFish otherFish;
-	public Point2D.Double oFish;
-	public double oSpeed, oFishR;
+	public static Point2D.Double oFish;
+	public static double oSpeed, oFishR;
 	
 	public OtherFish(Double oFish, double oSpeed, double oFishR)
 	{
@@ -19,29 +19,35 @@ public class OtherFish
 		this.oSpeed = oSpeed;
 		this.oFishR = oFishR;
 	}
-	
+
 	public void otherFishMove()
 	{
 		oFish.y += oSpeed;
 	}
 	
-	public boolean eatOtherFish(MainFish mainFish)
+	public static boolean eatOtherFish()
 	{
-		if(Math.pow(oFishR + mainFish.getFishR(), 2) > Math.pow(mainFish.getFishX() - oFish.x, 2) + Math.pow(mainFish.getFishY() - oFish.y, 2))
-		{	
-			mainFish.eaten = true;
+		if(Math.pow(oFishR + MainFish.mainFish.getFishR(), 2) > Math.pow(MainFish.mainFish.getFishX() - oFish.x, 2) + Math.pow(MainFish.mainFish.getFishY() - oFish.y, 2))
+		{
+			MainFish.mainFish.eaten = true;
 			return true;
-		}		
+		}
 		else
 		{
-			mainFish.eaten = false;
+			MainFish.mainFish.eaten = false;
 			return false;
-		}		
+		}
 	}
 	
-	public void draw(Graphics g)
+	public static OtherFish generateOtherFish()
+	{
+		otherFish = new OtherFish(new Point2D.Double(50, 1.0), 1.0, 3.0);
+		return otherFish;
+	}
+	
+/*	public void draw(Graphics g)
 	{
 		g.setColor(Color.BLACK);
 		g.fillOval((int)oFish.x * MainFish.SCALE, (int)oFish.y * MainFish.SCALE, (int)oFishR * MainFish.SCALE, (int)oFishR * MainFish.SCALE);
-	}
+	}*/
 }
