@@ -19,7 +19,6 @@ public class MainFish implements ActionListener, KeyListener
 {
 	public static MainFish mainFish;
 	public Point2D.Double fish;
-//	public static OtherFish otherFish;		//foodFish, killerFish
 	public FishPanel fishPanel;
 	public JFrame jframe;
 	public static final int STABLE = 0, LEFT = 1, RIGHT = 2, UP = 3, DOWN = 4, SCALE = 10;
@@ -55,10 +54,6 @@ public class MainFish implements ActionListener, KeyListener
 		OtherFish.otherFish = new OtherFish(new Point2D.Double(38.0, 1.0), 1.0, 3.0);
 		time = 0;
 		direction = STABLE;
-		//oFish = new Point(random.nextInt(78), 1);
-		//oFishR = 3;
-		//oSpeed = 5;
-		//otherFish.clear();
 		timer.start();
 	}
 	
@@ -72,23 +67,16 @@ public class MainFish implements ActionListener, KeyListener
 			{
 				if(!eaten)
 				{
-					//otherFish.oFish = new Point2D.Double(otherFish.oFish.x, otherFish.oFish.y + 1);
 					OtherFish.otherFish.otherFishMove();
 				}
 				
 				if(OtherFish.otherFish.oFish.y > 65 || OtherFish.eatOtherFish())
 				{
-					
-					//OtherFish.otherFish = new OtherFish(new Point2D.Double(38.0, 1.0), 1.0, 3.0);
 					OtherFish.generateOtherFish();
 				}
 			}
 			
-//			if(!eaten)
-//			{
-//				for(int i = 0; i < numOtherFish; i++)
-//					otherFish[i].oFish = new Point2D.Double(otherFish[i].oFish.x, otherFish[i].oFish.y + 1);
-//			}																			   //generate other fish
+//generate other fish
 //--------------------------------------------------------------------------------------------------------------//		
 			if(direction == LEFT && !over)
 			{
