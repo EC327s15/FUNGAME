@@ -18,22 +18,12 @@ public class FishPanel extends JPanel
 		g.fillRect(0, 0, 800, 700); 
 		MainFish mainFish = MainFish.mainFish;
 		OtherFish otherFish = OtherFish.otherFish;
-		//OtherFish otherFish = MainFish.otherFish;
+	
 		g.setColor(Color.blue);
-		//g.fillRect(mainFish.fish.x * MainFish.CENTER, mainFish.fish.y * MainFish.CENTER, MainFish.CENTER, MainFish.CENTER);
 		g.fillOval((int)mainFish.fish.x * MainFish.SCALE, (int)mainFish.fish.y * MainFish.SCALE, (int)mainFish.fishR * MainFish.SCALE, (int)mainFish.fishR * MainFish.SCALE);
-		//for(Point point: mainFish.otherFish)
-			//g.fillOval(point.x * MainFish.SCALE, point.y * MainFish.SCALE, mainFish.oFishR * MainFish.SCALE, mainFish.oFishR *MainFish.SCALE);
-		//g.fillOval(mainFish.oFish.x * MainFish.SCALE, mainFish.oFish.y * MainFish.SCALE, mainFish.oFishR * MainFish.SCALE, mainFish.oFishR *MainFish.SCALE);
-		//for(OtherFish f : MainFish.otherFish)
-		//{
-		//	f.draw(g);
-		//}
-		//otherFish.draw(g);
+
 		g.setColor(Color.BLACK);
 		g.fillOval((int)otherFish.oFish.x * MainFish.SCALE, (int)otherFish.oFish.y * MainFish.SCALE, (int)otherFish.oFishR * MainFish.SCALE, (int)otherFish.oFishR * MainFish.SCALE);
-		//String record = "Score: " +snake.score + ", Length: " + snake.tailLength + ", Time: " + snake.time / 20;
-		//g.setColor(Color.yellow);
-		//g.drawString(record, (int) (getWidth() / 2 - record.length() * 2.5f), 10);
+
 	}
 }
