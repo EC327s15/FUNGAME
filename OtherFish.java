@@ -44,10 +44,4 @@ public class OtherFish
 		otherFish = new OtherFish(new Point2D.Double(50, 1.0), 1.0, 3.0);
 		return otherFish;
 	}
-	
-/*	public void draw(Graphics g)
-	{
-		g.setColor(Color.BLACK);
-		g.fillOval((int)oFish.x * MainFish.SCALE, (int)oFish.y * MainFish.SCALE, (int)oFishR * MainFish.SCALE, (int)oFishR * MainFish.SCALE);
-	}*/
 }
