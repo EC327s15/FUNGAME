@@ -19,16 +19,18 @@ public class MainFish implements ActionListener, KeyListener
 {
 	public static MainFish mainFish;
 	public Point2D.Double fish;
+//	public static OtherFish otherFish;		//foodFish, killerFish
 	public FishPanel fishPanel;
 	public JFrame jframe;
 	public static final int STABLE = 0, LEFT = 1, RIGHT = 2, UP = 3, DOWN = 4, SCALE = 10;
 	public int direction, time, numOtherFish;
 	public double fishR;// oFishR;
-	public boolean over, eaten;
+	public static boolean over;
+	public boolean eaten;
 	public Random random = new Random();
 	public Dimension dim;
 	public Timer timer = new Timer(20, this);
-	public long startTime, endTime;
+	public long startTime, hungryTime;
 	
 	public MainFish()
 	{
@@ -54,6 +56,10 @@ public class MainFish implements ActionListener, KeyListener
 		OtherFish.otherFish = new OtherFish(new Point2D.Double(38.0, 1.0), 1.0, 3.0);
 		time = 0;
 		direction = STABLE;
+		//oFish = new Point(random.nextInt(78), 1);
+		//oFishR = 3;
+		//oSpeed = 5;
+		//otherFish.clear();
 		timer.start();
 	}
 	
@@ -67,16 +73,28 @@ public class MainFish implements ActionListener, KeyListener
 			{
 				if(!eaten)
 				{
+					//otherFish.oFish = new Point2D.Double(otherFish.oFish.x, otherFish.oFish.y + 1);
 					OtherFish.otherFish.otherFishMove();
 				}
 				
-				if(OtherFish.otherFish.oFish.y > 65 || OtherFish.eatOtherFish())
+				if(OtherFish.otherFish.oFish.y > 65)
 				{
+					//OtherFish.otherFish = new OtherFish(new Point2D.Double(38.0, 1.0), 1.0, 3.0);
+					OtherFish.generateOtherFish();	
+				}
+				
+				if(OtherFish.eatOtherFish() && fishR >= OtherFish.oFishR)
+				{
+					fishR++;
 					OtherFish.generateOtherFish();
 				}
+				
+				else if(OtherFish.eatOtherFish() && fishR < OtherFish.oFishR)
+				{
+					over = true;
+				}
 			}
-			
-//generate other fish
+																					   //generate other fish
 //--------------------------------------------------------------------------------------------------------------//		
 			if(direction == LEFT && !over)
 			{
@@ -174,36 +192,6 @@ public class MainFish implements ActionListener, KeyListener
 	{
 		return fish.y;
 	}
-	
-/*	private void deleteOtherFish(int index)				//otherFish in array
-	{
-		numOtherFish--;
-		for(int i = index; i < numOtherFish; i++)
-		{
-			otherFish[i] = otherFish[i+1];
-			otherFish[numOtherFish] = null;
-		}
-	}
-	
-	private void addOtherFish(OtherFish f)
-	{
-		otherFish[numOtherFish] = f;
-		numOtherFish++;
-	}
-	
-	private void updateOtherFish()		//only contains the eat condition
-	{
-		for(int i = 0; i < numOtherFish; i++)
-		{
-			otherFish[i].otherFishMove();
-			if(otherFish[i].eatOtherFish(mainFish))
-			{
-				fishR += 0.5;
-				deleteOtherFish(i);
-				i--;
-			}
-		}
-	}*/
 	
 	public static void main(String[] args){
 		mainFish = new MainFish();
