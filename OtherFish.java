@@ -14,9 +14,11 @@ public class OtherFish
 	public OtherFish(Double oFish, double oSpeed, double oFishR)
 	{
 		this.oFish = oFish;
-		double p = (int) Math.ceil(Math.random()*14);
+		double p = (int) Math.ceil(Math.random()*85);
 		oFish.x = p;
 		this.oSpeed = oSpeed;
+		double q = (int) Math.ceil(Math.random()*8);
+		oFishR = q;
 		this.oFishR = oFishR;
 	}
 
