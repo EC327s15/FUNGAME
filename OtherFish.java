@@ -1,7 +1,5 @@
 package FunFish;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 
@@ -32,6 +30,7 @@ public class OtherFish
 		if(Math.pow(oFishR + MainFish.mainFish.getFishR(), 2) > Math.pow(MainFish.mainFish.getFishX() - oFish.x, 2) + Math.pow(MainFish.mainFish.getFishY() - oFish.y, 2))
 		{
 			MainFish.mainFish.eaten = true;
+			MainFish.score++;
 			return true;
 		}
 		else
