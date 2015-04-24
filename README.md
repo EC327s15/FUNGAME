@@ -6,6 +6,7 @@ The player fish will be controled by the orientation of the android phone.
 
 Player controls a fish, which can eat smaller fish to win scores.
 Your fish should not be too hungry, eat too much, or interact with bigger fish. 
+The higher the level is, the more difficult for you to survive!
 
 Note:
 Currently, the back-end code are stored in the MainFish.java, OtherFish.java, and FishPanel.java.
