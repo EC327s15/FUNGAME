@@ -19,14 +19,18 @@ public class MainFish implements ActionListener, KeyListener
 {
 	public static MainFish mainFish;
 	public Point2D.Double fish;
+//	public static OtherFish otherFish;		//foodFish, killerFish
 	public FishPanel fishPanel;
 	public JFrame jframe;
 	public static final int STABLE = 0, LEFT = 1, RIGHT = 2, UP = 3, DOWN = 4, SCALE = 10;
-	public int direction, numSmallFish;
+	public int direction;
 	public static int score;
+	public static int level;
+	public static int numSmallFish;
 	public static double fishR;
 	public static boolean over;
 	public boolean eaten;
+	//public Random random = new Random();
 	public Dimension dim;
 	public Timer timer = new Timer(20, this);
 	public long startTime;
@@ -49,6 +53,7 @@ public class MainFish implements ActionListener, KeyListener
 	{
 		startTime = System.currentTimeMillis();
 		over = false;
+		level = 1;
 		eaten = false;
 		fish = new Point2D.Double(38, 60);
 		fishR = 5;
@@ -64,6 +69,7 @@ public class MainFish implements ActionListener, KeyListener
 	public void actionPerformed(ActionEvent arg0) 
 	{
 		fishPanel.repaint();
+		
 		if(!over)
 		{
 			if(!eaten)
@@ -71,22 +77,41 @@ public class MainFish implements ActionListener, KeyListener
 				OtherFish.otherFish.otherFishMove();
 			}
 				
-			if(OtherFish.otherFish.oFish.y > 65)
+			if(OtherFish.otherFish.oFish.y > 65 || OtherFish.otherFish.oFish.y < 1 || OtherFish.otherFish.oFish.x > 80 || OtherFish.otherFish.oFish.x < 1)
 			{
 				OtherFish.generateOtherFish();
 				if(OtherFish.oFishR < fishR)
 				{
 					numSmallFish++;
 				}
+				OtherFish.otherFish.otherFishMove();
 			}
 			
 			else if(OtherFish.eatOtherFish() && fishR >= OtherFish.oFishR)
 			{
 				fishR++;
+				score++;
+				
+				if(score >= 3 && score < 6)
+				{
+					level = 2;
+				}
+				
+				else if(score >= 6 && score < 9)
+				{
+					level = 3;
+				}
+				
+				else if(score >= 9)
+				{
+					level = 4;
+				}
+				
 				OtherFish.generateOtherFish();
+				OtherFish.otherFish.otherFishMove();
 			}
 			
-			else if(OtherFish.eatOtherFish() && fishR < OtherFish.oFishR || fishR >= 10)
+			else if(OtherFish.eatOtherFish() && fishR < OtherFish.oFishR || fishR >= 100)
 			{
 				over = true;
 			}
@@ -100,8 +125,8 @@ public class MainFish implements ActionListener, KeyListener
 					over = true;
 				}
 			}
-			
-			if(score >= 2)
+		
+			if(score % 3 == 2)
 			{
 				OtherFish.oSpeed += 0.01;
 			}
