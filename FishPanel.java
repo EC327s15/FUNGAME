@@ -20,7 +20,14 @@ public class FishPanel extends JPanel
 		OtherFish otherFish = OtherFish.otherFish;
 		g.setColor(Color.blue);
 		g.fillOval((int)mainFish.fish.x * MainFish.SCALE, (int)mainFish.fish.y * MainFish.SCALE, (int)mainFish.fishR * MainFish.SCALE, (int)mainFish.fishR * MainFish.SCALE);
-
+		//for(Point point: mainFish.otherFish)
+			//g.fillOval(point.x * MainFish.SCALE, point.y * MainFish.SCALE, mainFish.oFishR * MainFish.SCALE, mainFish.oFishR *MainFish.SCALE);
+		//g.fillOval(mainFish.oFish.x * MainFish.SCALE, mainFish.oFish.y * MainFish.SCALE, mainFish.oFishR * MainFish.SCALE, mainFish.oFishR *MainFish.SCALE);
+		//for(OtherFish f : MainFish.otherFish)
+		//{
+		//	f.draw(g);
+		//}
+		//otherFish.draw(g);
 		g.setColor(Color.BLACK);
 		g.fillOval((int)otherFish.oFish.x * MainFish.SCALE, (int)otherFish.oFish.y * MainFish.SCALE, (int)otherFish.oFishR * MainFish.SCALE, (int)otherFish.oFishR * MainFish.SCALE);
 		String record = "Score: " + MainFish.score;
