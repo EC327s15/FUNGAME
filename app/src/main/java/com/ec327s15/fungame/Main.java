@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class Main extends Activity implements OnClickListener {
@@ -27,6 +28,7 @@ public class Main extends Activity implements OnClickListener {
         button2 = (Button) findViewById(R.id.button2);
         button.setOnClickListener(this);
         button2.setOnClickListener(this);
+
 
 
 
@@ -71,5 +73,10 @@ public class Main extends Activity implements OnClickListener {
                 break;
             }
         }
+    }
+
+    public void gotoscores(View view){
+           Intent intent = new Intent(this,Highscore.class);
+            startActivity(intent);
     }
 }
