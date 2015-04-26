@@ -16,12 +16,14 @@ public class MainHighScore extends ActionBarActivity {
         setContentView(R.layout.activity_main_high_score);
         Intent highscoreactivity = getIntent();
         String message = highscoreactivity.getStringExtra(Game.EXTRA_MESSAGE);
-            TextView textView = new TextView(this);
-            textView.setTextSize(40);
-            textView.setText(message);
-            setContentView(textView);
 
-        }
+        TextView t= new TextView(this);
+        t=(TextView)findViewById(R.id.textView);
+        t.setText(message);
+
+
+
+    }
 
 
 
@@ -47,5 +49,5 @@ public class MainHighScore extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    
+
 }

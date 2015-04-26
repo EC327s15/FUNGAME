@@ -17,10 +17,13 @@ public class Highscore extends ActionBarActivity {
         setContentView(R.layout.activity_highscore);
         Intent score = getIntent();
         String message = score.getStringExtra(Game.EXTRA_MESSAGE);
-        TextView highscore = new TextView(this);
-        highscore.setTextSize(40);
-        highscore.setText(Integer.toString(gamePrefs.getInt("currentscore",-1)));
-        setContentView(highscore);
+        TextView t = new TextView(this);
+        t = (TextView)findViewById(R.id.highscore);
+        t.setText(Integer.toString(gamePrefs.getInt("currentscore",-1)));
+        //TextView highscore = new TextView(this);
+        //highscore.setTextSize(40);
+        //highscore.setText(Integer.toString(gamePrefs.getInt("currentscore",-1)));
+        //setContentView(highscore);
     }
 
 

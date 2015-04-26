@@ -86,3 +86,4 @@ public class Main extends Activity implements OnClickListener {
     public static final String GAME_PREFS = "HighScoreFile";
     public final static String EXTRA_MESSAGE = "com.ec327s15.fungame.MESSAGE";
 }
+
