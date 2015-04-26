@@ -36,5 +36,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="70dp"
         android:textSize="36sp"
-        android:minWidth="300dp" />
+        android:minWidth="300dp"
+        android:onClick="goToScores"/>
+
 </RelativeLayout>

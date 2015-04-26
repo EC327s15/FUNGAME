@@ -32,6 +32,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.ec327s15.fungame.Main" />
         </activity>
+        <activity
+            android:name=".MainHighScore"
+            android:label="@string/title_activity_main_high_score"
+            android:parentActivityName=".Main" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ec327s15.fungame.Main" />
+        </activity>
     </application>
 
 </manifest>

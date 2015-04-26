@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.content.SharedPreferences;
 
 public class Main extends Activity implements OnClickListener {
 
@@ -23,14 +23,12 @@ public class Main extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);gamePrefs = getSharedPreferences(GAME_PREFS, 0);
         button = (Button) findViewById(R.id.button);
         button2 = (Button) findViewById(R.id.button2);
         button.setOnClickListener(this);
         button2.setOnClickListener(this);
-
-
-
+        gamePrefs = getSharedPreferences(GAME_PREFS, 0);
 
     }
 
@@ -72,11 +70,19 @@ public class Main extends Activity implements OnClickListener {
 
                 break;
             }
+            case R.id.button2 :
+            {
+                Intent intent = new Intent(Main.this,MainHighScore.class);
+                intent.putExtra(EXTRA_MESSAGE, Integer.toString(gamePrefs.getInt("currentscore",-1)));
+                startActivity(intent);
+            }
         }
     }
 
-    public void gotoscores(View view){
-           Intent intent = new Intent(this,Highscore.class);
-            startActivity(intent);
-    }
+
+
+
+    private SharedPreferences gamePrefs;
+    public static final String GAME_PREFS = "HighScoreFile";
+    public final static String EXTRA_MESSAGE = "com.ec327s15.fungame.MESSAGE";
 }

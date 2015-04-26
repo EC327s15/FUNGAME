@@ -10,4 +10,7 @@
     <string name="highscores">High Scores</string>
     <string name="title_activity_game">Game</string>
     <string name="ic_character">ic_character</string>
+    <string name="title_activity_highscore">Highscore</string>
+    <string name="title_activity_main_high_score">MainHighScore</string>
+    <string name="title_activity_new_high_score">NewHighScore</string>
 </resources>

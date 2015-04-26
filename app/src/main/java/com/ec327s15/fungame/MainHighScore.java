@@ -1,33 +1,34 @@
 package com.ec327s15.fungame;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.content.SharedPreferences;
 import android.widget.TextView;
+import android.content.Intent;
 
-
-public class Highscore extends ActionBarActivity {
+public class MainHighScore extends ActionBarActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {gamePrefs = getSharedPreferences(GAME_PREFS, 0);
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_highscore);
-        Intent score = getIntent();
-        String message = score.getStringExtra(Game.EXTRA_MESSAGE);
-        TextView highscore = new TextView(this);
-        highscore.setTextSize(40);
-        highscore.setText(Integer.toString(gamePrefs.getInt("currentscore",-1)));
-        setContentView(highscore);
-    }
+        setContentView(R.layout.activity_main_high_score);
+        Intent highscoreactivity = getIntent();
+        String message = highscoreactivity.getStringExtra(Game.EXTRA_MESSAGE);
+            TextView textView = new TextView(this);
+            textView.setTextSize(40);
+            textView.setText(message);
+            setContentView(textView);
+
+        }
+
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_highscore, menu);
+        getMenuInflater().inflate(R.menu.menu_main_high_score, menu);
         return true;
     }
 
@@ -44,6 +45,7 @@ public class Highscore extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }private SharedPreferences gamePrefs;
-    public static final String GAME_PREFS = "HighScoreFile";
+    }
+
+    
 }
