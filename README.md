@@ -1,13 +1,14 @@
 # FUNGAME
 Hungry Fish project
 
-This game will be made by android.
-The player fish will be controled by the orientation of the android phone.
+This game is written in Android environment.
+The player fish is controled by the sensorManager of the android phone.
 
-Player controls a fish, which can eat smaller fish to win scores.
-Your fish should not be too hungry, eat too much, or interact with bigger fish. 
+Player controls a fish, which can eat food to win scores.
+Your fish should neither be too hungry, nor eat too much.
 The higher the level is, the more difficult for you to survive!
 
 Note:
-Currently, the back-end code are stored in the MainFish.java, OtherFish.java, and FishPanel.java.
-You can use UP, DOWN, RIGHT, and LEFT to control the fish, and SPACE to restart the game.
+The Android code is included in the path: FUNGAME/app/src/main/java/com/ec327s15/fungame/
+Files include MainActicityFish.java, MyFish.java, Recti.java, and FishPanel.java.
+
