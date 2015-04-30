@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import java.util.Random;
 
 /**
- * Created by CandyNUT on 2015/4/30.
+ * Created by Yigang on 2015/4/30.
  */
 public class Recti
 {
@@ -53,7 +53,7 @@ public class Recti
     {
         if(FishPanel.level == 1)
         {
-            rect_x = 100 + random.nextInt(3000);
+            rect_x = 100 + random.nextInt(6000);
             rect_y = 100;
             rect_w = 150 + random.nextInt(1000);
             rect_h = rect_w;
@@ -62,7 +62,7 @@ public class Recti
         else if(FishPanel.level == 2)
         {
             rect_x = 100;
-            rect_y = 100 + random.nextInt(3000);
+            rect_y = 100 + random.nextInt(6000);
             rect_w = 150 + random.nextInt(1000);
             rect_h = rect_w;
         }
@@ -71,13 +71,13 @@ public class Recti
             if(FishPanel.score % 2 == 1)
             {
                 rect_x = 100;
-                rect_y = 100 + random.nextInt(3000);
+                rect_y = 100 + random.nextInt(6000);
                 rect_w = 150 + random.nextInt(1000);
                 rect_h = rect_w;
             }
             else if(FishPanel.score % 2 == 0)
             {
-                rect_x = 100 + random.nextInt(3000);
+                rect_x = 100 + random.nextInt(6000);
                 rect_y = 100;
                 rect_w = 150 + random.nextInt(1000);
                 rect_h = rect_w;
@@ -89,9 +89,10 @@ public class Recti
         {
             MyFish.fishScale -= 0.01;
             if(MyFish.fishScale <= 0.03)
+            {
+                FishPanel.gameOver = true;
                 FishPanel.flag = false;
+            }
         }
-
-
     }
 }
