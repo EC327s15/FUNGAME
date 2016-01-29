@@ -11,4 +11,3 @@ The higher the level is, the more difficult for you to survive!
 o	Using MVC design pattern to design the game in Android Studio
 o	Controlling the object by tilt the android phone
 o	Demo: https://youtu.be/4Zu1UyU6buM
-
